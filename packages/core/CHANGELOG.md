@@ -1,5 +1,20 @@
 # @voltagent/core
 
+## 2.7.1
+
+### Patch Changes
+
+- [#1202](https://github.com/VoltAgent/voltagent/pull/1202) [`71c9f84`](https://github.com/VoltAgent/voltagent/commit/71c9f84a9f58b591c453900c7c0a4eda53a08196) Thanks [@KeWang0622](https://github.com/KeWang0622)! - fix(core): forward providerMetadata on tool-result and tool-error stream chunks
+
+  Google Vertex thinking models attach `providerMetadata` (containing `thoughtSignature`) to
+  tool-output stream events. The `tool-result` → `tool-output-available` and `tool-error` →
+  `tool-output-error` conversions in `convertFullStreamChunkToUIMessageStream` were not forwarding
+  this field, causing the AI SDK's UI message stream schema validation to reject the chunk as
+  having unrecognized keys. This broke all tool calls when using `@ai-sdk/google-vertex` with
+  thinking models (e.g. `gemini-3-flash-preview`).
+
+  Fixes #1195
+
 ## 2.7.0
 
 ### Minor Changes
